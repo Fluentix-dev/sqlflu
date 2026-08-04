@@ -1,6 +1,0 @@
-CREATE TABLE Users (
-    Id INT PRIMARY KEY,
-    Name VARCHAR(100),
-    Age INT,
-    Email VARCHAR(255)
-);
