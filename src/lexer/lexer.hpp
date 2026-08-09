@@ -23,5 +23,6 @@ namespace frontend {
         char current_char;
 
         void advance();
+        bool overflow();
     };
 }

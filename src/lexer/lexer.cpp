@@ -20,9 +20,13 @@ namespace frontend {
         this->current_char = (++this->index < this->src.size() ? this->src[this->index] : '\0');
     }
 
+    bool Lexer::overflow() {
+        return this->index >= this->src.size();
+    }
+
     LexerResult Lexer::tokenize() {
         std::vector<Token> tokens = {};
-        while (this->current_char != '\0') {
+        while (!this->overflow()) {
             if (this->current_char == ' ' || this->current_char == '\n' || this->current_char == '\r' || this->current_char == '\t') {
                 this->advance();
                 continue;
@@ -79,7 +83,7 @@ namespace frontend {
             if (this->current_char == '.' || ('0' <= this->current_char && this->current_char <= '9')) {
                 bool dot = this->current_char == '.';
                 std::string literal = "";
-                while (this->current_char != '\0' && (this->current_char == '.' || ('0' <= this->current_char && this->current_char <= '9'))) {
+                while (!this->overflow() && (this->current_char == '.' || ('0' <= this->current_char && this->current_char <= '9'))) {
                     if (this->current_char == '.') {
                         if (dot) {
                             return LexerResult(tokens, "Syntax Error", "extra '.' in numeric literal");
@@ -98,7 +102,7 @@ namespace frontend {
 
             if (this->current_char == '_' || ('a' <= this->current_char && this->current_char <= 'z') || ('A' <= this->current_char && this->current_char <= 'Z')) {
                 std::string identifier = "";
-                while (this->current_char != '\0' && (this->current_char == '_' || ('a' <= this->current_char && this->current_char <= 'z') || ('A' <= this->current_char && this->current_char <= 'Z'))) {
+                while (!this->overflow() && (this->current_char == '_' || ('a' <= this->current_char && this->current_char <= 'z') || ('A' <= this->current_char && this->current_char <= 'Z'))) {
                     identifier += this->current_char;
                     this->advance();
                 }

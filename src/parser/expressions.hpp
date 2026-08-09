@@ -30,4 +30,10 @@ namespace frontend {
 
         FloatExpression(const std::string &value);
     };
+
+    struct IdentifierExpression : public Expression {
+        std::string symbol;
+
+        IdentifierExpression(const std::string &value);
+    };
 }

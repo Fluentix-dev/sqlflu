@@ -6,7 +6,8 @@ namespace frontend {
         BinaryExpr,
         UnaryExpr,
         IntExpr,
-        FloatExpr
+        FloatExpr,
+        IdentifierExpr
     };
 
     struct Statement {

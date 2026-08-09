@@ -4,8 +4,8 @@
 
 namespace frontend {
     struct BlockStatement : public Statement {
-        std::vector<Statement> body;
+        std::vector<std::shared_ptr<Statement>> body;
         
-        BlockStatement(const std::vector<Statement> &body);
+        BlockStatement(const std::vector<std::shared_ptr<Statement>> &body);
     };
 }
