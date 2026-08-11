@@ -8,7 +8,8 @@ namespace frontend {
         IntExpr,
         FloatExpr,
         IdentifierExpr,
-        CreateStmt
+        CreateStmt,
+        DropStmt
     };
 
     struct Statement {

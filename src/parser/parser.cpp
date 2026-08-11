@@ -41,6 +41,8 @@ namespace frontend {
         ParserResult stmt = ParserResult(nullptr);
         if (this->current_token.type == TokenType::Create) {
             stmt = this->create_statement();
+        } else if (this->current_token.type == TokenType::Drop) {
+            stmt = this->drop_statement();
         } else {
             stmt = this->expression();
         }
@@ -75,6 +77,26 @@ namespace frontend {
         this->advance();
 
         return ParserResult(std::make_shared<CreateStatement>(type, name));
+    }
+
+    ParserResult Parser::drop_statement() {
+        this->advance();
+        Component type = Component::Database;
+        if (this->current_token.type == TokenType::Database) {
+            // database was set default, there's no need to change the type
+        } else {
+            return ParserResult(nullptr, "Syntax Error", "expected 'database', got '" + this->current_token.value + "'");
+        }
+
+        this->advance();
+        if (this->current_token.type != TokenType::Identifier) {
+            return ParserResult(nullptr, "Syntax Error", "expected a name, not a keyword, got '" + this->current_token.value + "'");
+        }
+
+        std::string name = this->current_token.value;
+        this->advance();
+
+        return ParserResult(std::make_shared<DropStatement>(type, name));
     }
 
     ParserResult Parser::expression() {

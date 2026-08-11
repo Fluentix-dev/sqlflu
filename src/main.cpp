@@ -77,6 +77,12 @@ void debug_stmt(const std::shared_ptr<frontend::Statement> &stmt, const size_t i
         std::cout << "CREATE " << component_type_to_string(create->type) << " " << create->name;
         return;
     }
+
+    if (stmt->type == frontend::NodeType::DropStmt) {
+        std::shared_ptr<frontend::DropStatement> create = std::static_pointer_cast<frontend::DropStatement>(stmt);
+        std::cout << "DROP " << component_type_to_string(create->type) << " " << create->name;
+        return;
+    }
     
     debug_expr(std::static_pointer_cast<frontend::Expression>(stmt));
 }

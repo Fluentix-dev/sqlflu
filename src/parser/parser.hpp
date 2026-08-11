@@ -26,6 +26,7 @@ namespace frontend {
         bool overflow();
         ParserResult statement();
         ParserResult create_statement();
+        ParserResult drop_statement();
         ParserResult expression();
         ParserResult additive();
         ParserResult multiplicative();

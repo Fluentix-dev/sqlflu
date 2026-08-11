@@ -20,4 +20,11 @@ namespace frontend {
 
         CreateStatement(const Component type, const std::string &name);
     };
+
+    struct DropStatement : public Statement {
+        Component type;
+        std::string name;
+
+        DropStatement(const Component type, const std::string &name);
+    };
 }

@@ -29,6 +29,7 @@ namespace frontend {
         const std::unordered_map<std::string, TokenType> KEYWORDS = {
             {"create", TokenType::Create},
             {"database", TokenType::Database},
+            {"drop", TokenType::Drop}
         };
 
         std::vector<Token> tokens = {};
