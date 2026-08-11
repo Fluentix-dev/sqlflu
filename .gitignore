@@ -1,9 +1,0 @@
-# Ignore everything by default
-*
-
-# Allow directories so Git can recurse into them
-!*/
-
-# Track C++ source/header files
-!*.cpp
-!*.hpp
