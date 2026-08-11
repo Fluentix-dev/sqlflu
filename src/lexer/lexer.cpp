@@ -29,7 +29,8 @@ namespace frontend {
         const std::unordered_map<std::string, TokenType> KEYWORDS = {
             {"create", TokenType::Create},
             {"database", TokenType::Database},
-            {"drop", TokenType::Drop}
+            {"drop", TokenType::Drop},
+            {"use", TokenType::Use}
         };
 
         std::vector<Token> tokens = {};
@@ -58,8 +59,16 @@ namespace frontend {
             }
 
             if (this->current_char == '/') {
-                tokens.push_back(Token(TokenType::Divide, "/"));
                 this->advance();
+                if (this->current_char == '/') {
+                    while (!this->overflow() && this->current_char != '\n') {
+                        this->advance();
+                    }
+
+                    continue;
+                }
+                
+                tokens.push_back(Token(TokenType::Divide, "/"));
                 continue;
             }
 

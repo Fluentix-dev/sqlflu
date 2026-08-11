@@ -27,6 +27,7 @@ namespace frontend {
         ParserResult statement();
         ParserResult create_statement();
         ParserResult drop_statement();
+        ParserResult use_statement();
         ParserResult expression();
         ParserResult additive();
         ParserResult multiplicative();

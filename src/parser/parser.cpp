@@ -43,6 +43,8 @@ namespace frontend {
             stmt = this->create_statement();
         } else if (this->current_token.type == TokenType::Drop) {
             stmt = this->drop_statement();
+        } else if (this->current_token.type == TokenType::Use) {
+            stmt = this->use_statement();
         } else {
             stmt = this->expression();
         }
@@ -97,6 +99,18 @@ namespace frontend {
         this->advance();
 
         return ParserResult(std::make_shared<DropStatement>(type, name));
+    }
+
+    ParserResult Parser::use_statement() {
+        this->advance();
+        if (this->current_token.type != TokenType::Identifier) {
+            return ParserResult(nullptr, "Syntax Error", "expected a name, not a keyword, got '" + this->current_token.value + "'");
+        }
+
+        std::string database_name = this->current_token.value;
+        this->advance();
+
+        return ParserResult(std::make_shared<UseStatement>(database_name));
     }
 
     ParserResult Parser::expression() {

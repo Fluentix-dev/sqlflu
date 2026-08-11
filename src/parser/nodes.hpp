@@ -9,7 +9,8 @@ namespace frontend {
         FloatExpr,
         IdentifierExpr,
         CreateStmt,
-        DropStmt
+        DropStmt,
+        UseStmt
     };
 
     struct Statement {

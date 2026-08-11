@@ -27,4 +27,10 @@ namespace frontend {
 
         DropStatement(const Component type, const std::string &name);
     };
+
+    struct UseStatement : public Statement {
+        std::string database_name;
+
+        UseStatement(const std::string &database_name);
+    };
 }

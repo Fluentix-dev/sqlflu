@@ -17,7 +17,8 @@ namespace frontend {
         Comma,
         Create,
         Database,
-        Drop
+        Drop,
+        Use
     };
 
     struct Token {
