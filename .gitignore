@@ -7,9 +7,3 @@
 # Track C++ source/header files
 !*.cpp
 !*.hpp
-
-# Track documentation and project files (optional)
-!.gitignore
-!README.md
-!Makefile
-!config.mk
