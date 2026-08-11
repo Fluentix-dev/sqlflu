@@ -86,8 +86,10 @@ namespace frontend {
         Component type = Component::Database;
         if (this->current_token.type == TokenType::Database) {
             // database was set default, there's no need to change the type
+        } else if (this->current_token.type == TokenType::Table) {
+            type = Component::Table;
         } else {
-            return ParserResult(nullptr, "Syntax Error", "expected 'database', got '" + this->current_token.value + "'");
+            return ParserResult(nullptr, "Syntax Error", "expected 'database' or 'table', got '" + this->current_token.value + "'");
         }
 
         this->advance();

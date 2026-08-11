@@ -30,7 +30,8 @@ namespace frontend {
             {"create", TokenType::Create},
             {"database", TokenType::Database},
             {"drop", TokenType::Drop},
-            {"use", TokenType::Use}
+            {"use", TokenType::Use},
+            {"table", TokenType::Table}
         };
 
         std::vector<Token> tokens = {};

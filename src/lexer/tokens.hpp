@@ -18,7 +18,8 @@ namespace frontend {
         Create,
         Database,
         Drop,
-        Use
+        Use,
+        Table
     };
 
     struct Token {
