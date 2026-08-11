@@ -7,7 +7,8 @@ namespace frontend {
         UnaryExpr,
         IntExpr,
         FloatExpr,
-        IdentifierExpr
+        IdentifierExpr,
+        CreateStmt
     };
 
     struct Statement {

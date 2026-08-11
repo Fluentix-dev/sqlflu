@@ -1,5 +1,6 @@
 #include "lexer.hpp"
 #include <iostream>
+#include <unordered_map>
 
 namespace frontend {
     LexerResult::LexerResult(const std::vector<Token> &tokens, const std::string error_type, const std::string error_description) : tokens(tokens), error_type(error_type), error_description(error_description) {}
@@ -25,6 +26,11 @@ namespace frontend {
     }
 
     LexerResult Lexer::tokenize() {
+        const std::unordered_map<std::string, TokenType> KEYWORDS = {
+            {"create", TokenType::Create},
+            {"database", TokenType::Database},
+        };
+
         std::vector<Token> tokens = {};
         while (!this->overflow()) {
             if (this->current_char == ' ' || this->current_char == '\n' || this->current_char == '\r' || this->current_char == '\t') {
@@ -102,12 +108,14 @@ namespace frontend {
 
             if (this->current_char == '_' || ('a' <= this->current_char && this->current_char <= 'z') || ('A' <= this->current_char && this->current_char <= 'Z')) {
                 std::string identifier = "";
+                std::string keyword_potential = "";
                 while (!this->overflow() && (this->current_char == '_' || ('a' <= this->current_char && this->current_char <= 'z') || ('A' <= this->current_char && this->current_char <= 'Z'))) {
                     identifier += this->current_char;
+                    keyword_potential += ('A' <= this->current_char && this->current_char <= 'Z' ? (char)(this->current_char - 'A' + 'a') : this->current_char);
                     this->advance();
                 }
 
-                tokens.push_back(Token(TokenType::Identifier, identifier));
+                tokens.push_back(Token((KEYWORDS.count(keyword_potential) ? KEYWORDS.at(keyword_potential) : TokenType::Identifier), identifier));
                 continue;
             }
 

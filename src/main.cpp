@@ -44,6 +44,18 @@ void debug_expr(const std::shared_ptr<frontend::Expression> &expr) {
     std::cout << "node type undefined: " << static_cast<int>(expr->type) << "\n";
 }
 
+std::string component_type_to_string(frontend::Component type) {
+    if (type == frontend::Component::Database) {
+        return "DATABASE";
+    }
+
+    if (type == frontend::Component::Table) {
+        return "TABLE";
+    }
+
+    return "undefined";
+}
+
 void debug_stmt(const std::shared_ptr<frontend::Statement> &stmt, const size_t indentation = 0) {
     for (size_t i = 0; i < indentation; i++) {
         std::cout << "    ";
@@ -57,6 +69,12 @@ void debug_stmt(const std::shared_ptr<frontend::Statement> &stmt, const size_t i
             std::cout << "\n";
         }
 
+        return;
+    }
+
+    if (stmt->type == frontend::NodeType::CreateStmt) {
+        std::shared_ptr<frontend::CreateStatement> create = std::static_pointer_cast<frontend::CreateStatement>(stmt);
+        std::cout << "CREATE " << component_type_to_string(create->type) << " " << create->name;
         return;
     }
     

@@ -14,7 +14,9 @@ namespace frontend {
         Int,
         Float,
         Identifier,
-        Comma
+        Comma,
+        Create,
+        Database
     };
 
     struct Token {

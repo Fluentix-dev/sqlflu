@@ -2,4 +2,5 @@
 
 namespace frontend {
     BlockStatement::BlockStatement(const std::vector<std::shared_ptr<Statement>> &body) : Statement(NodeType::BlockStmt), body(body) {}
+    CreateStatement::CreateStatement(const Component type, const std::string &name) : Statement(NodeType::CreateStmt), type(type), name(name) {}
 }
